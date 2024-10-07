@@ -1,0 +1,192 @@
+basePath: /
+definitions:
+  models.ErrorDetail:
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+    type: object
+  models.ErrorResponse:
+    properties:
+      error:
+        $ref: '#/definitions/models.ErrorDetail'
+    type: object
+  models.SongRequest:
+    properties:
+      group:
+        type: string
+      link:
+        type: string
+      name:
+        type: string
+      releaseDate:
+        type: string
+      text:
+        type: string
+    type: object
+  models.SuccessResponse:
+    properties:
+      result: {}
+    type: object
+host: localhost:1232
+info:
+  contact: {}
+  description: This is a sample server celler server.
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /song:
+    get:
+      parameters:
+      - description: Group name
+        in: query
+        name: group
+        type: string
+      - description: Song title
+        in: query
+        name: song
+        type: string
+      - description: Lyric
+        in: query
+        name: lyric
+        type: string
+      - description: Link
+        in: query
+        name: link
+        type: string
+      - description: Page(Default 1)
+        in: query
+        name: page
+        type: string
+      - description: Size(Default 10)
+        in: query
+        name: size
+        type: string
+      - description: From Date
+        in: query
+        name: from
+        type: string
+      - description: To Date
+        in: query
+        name: to
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SuccessResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      tags:
+      - Music
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Song request
+        in: body
+        name: song
+        required: true
+        schema:
+          $ref: '#/definitions/models.SongRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SuccessResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      tags:
+      - Music
+  /song/{songId}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: songId
+        in: path
+        name: songId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SuccessResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      tags:
+      - Music
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: songId
+        in: path
+        name: songId
+        required: true
+        type: integer
+      - description: Couplet
+        in: query
+        name: couplet
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SuccessResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      tags:
+      - Music
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: songId
+        in: path
+        name: songId
+        required: true
+        type: integer
+      - description: Song request
+        in: body
+        name: song
+        required: true
+        schema:
+          $ref: '#/definitions/models.SongRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SuccessResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      tags:
+      - Music
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

@@ -1,0 +1,2 @@
+migration_up: migrate -database postgres://postgres:qwe123@127.0.0.1:5432/song_library?sslmode=disable -path migrations up
+migration_down: migrate -database postgres://postgres:qwe123@127.0.0.1:5432/song_library?sslmode=disable -path migrations down
